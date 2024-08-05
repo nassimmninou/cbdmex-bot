@@ -1,20 +1,8 @@
 export const INITIAL_QUESTIONS = [
-  {
-    content: "Cursos y talleres de espiritualidad",
-  },
-  {
-    content: "Desarrollo personal",
-  },
-  {
-    content: "Productos",
-  },
-  {
-    content: "Esoterismo y oráculos",
-  },
-  {
-    content: "Eventos en vivo",
-  },
-  {
-    content: "Cannabis medicinal",
-  },
+  { content: "Beneficios del cannabis medicinal?" },
+  { content: "Tipos de productos de cannabis medicinal?" },
+  { content: "Cómo comprar cannabis medicinal?" },
+  { content: "Necesito receta médica?" },
+  { content: "Efectos secundarios?" },
+  { content: "Cómo almacenar el cannabis medicinal?" },
 ];
