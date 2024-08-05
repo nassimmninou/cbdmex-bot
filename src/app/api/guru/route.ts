@@ -9,6 +9,7 @@ import { createRetrieverTool } from "langchain/tools/retriever";
 import { AgentExecutor, createOpenAIFunctionsAgent } from "langchain/agents";
 import { promises as fs } from 'fs';
 import path from 'path';
+import { connectToDatabase } from '../../../utils/mongoconnect';
 
 import {
   ChatPromptTemplate,
@@ -102,12 +103,15 @@ export async function POST(req: NextRequest) {
       },
     );
 
-    const prompt_loaded = ""
-    const filePath = path.join(process.cwd(), 'data.json');
-    const jsonData = await fs.readFile(filePath, 'utf8');
-    const data = JSON.parse(jsonData);
-    console.log("wjah lkhorza")
-    console.log(data.prompt);
+    const { db, client } = await connectToDatabase();
+
+    const collection = db.collection('cbdmex'); // Replace with your collection name
+
+    // Retrieve the latest inserted document
+    const latestDocument = await collection.find().sort({ _id: -1 }).limit(1).toArray();
+    console.log("a9wad latest Document fl3alam l3arabi abrother")
+    console.log(latestDocument[0].prompt)
+    client.close();
 
     const tool = createRetrieverTool(retriever, {
       name: "Despierta-General-Knowledge",
@@ -115,7 +119,7 @@ export async function POST(req: NextRequest) {
     });
 
     
-    const AGENT_SYSTEM_TEMPLATE =data.prompt ;
+    const AGENT_SYSTEM_TEMPLATE =latestDocument[0].prompt ;
 
     const prompt = ChatPromptTemplate.fromMessages([
       ["system", AGENT_SYSTEM_TEMPLATE],
