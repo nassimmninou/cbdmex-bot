@@ -50,41 +50,44 @@ export default function Settings() {
     } catch (error) {
       setAlert({ type: "error", message: `Update failed: ${error.message}` });
     }
+
+    // Clear the alert after 3 seconds
+    setTimeout(() => {
+      setAlert(null);
+    }, 3000);
   };
 
   return (
     <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          {alert && (
-            <div
-              className={`alert ${alert.type === "success" ? "alert-success" : "alert-error"}`}
-              role="alert"
-            >
-              {alert.message}
-            </div>
-          )}
-          <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            Prompt Editor
-          </label>
-          <textarea
-            value={prompt}
-            onChange={handleChange}
-            id="message"
-            rows="4"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            placeholder="Write your thoughts here..."
-          ></textarea>
-          <button
-            onClick={handleClick}
-            className="mt-2 px-4 py-2 bg-green-500 text-white rounded-lg"
-          >
-            Update
-          </button>
-        </>
+      {alert && (
+        <div
+          className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-lg text-white ${
+            alert.type === "success" ? "bg-green-500" : "bg-red-500"
+          }`}
+          role="alert"
+        >
+          {alert.message}
+        </div>
       )}
+      <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        Prompt Editor
+      </label>
+      <textarea
+        value={loading ? "Loading..." : prompt}
+        onChange={handleChange}
+        disabled={loading}
+        id="message"
+        rows="4"
+        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+        placeholder="Write your thoughts here..."
+      ></textarea>
+      <button
+        onClick={handleClick}
+        className="mt-2 px-4 py-2 bg-green-500 text-white rounded-lg"
+        disabled={loading}
+      >
+        Update
+      </button>
     </>
   );
 }
