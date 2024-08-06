@@ -58,7 +58,7 @@ export default function Home() {
   const [audioPlayer, setAudioPlayer] = useState<HTMLAudioElement | null>(null);
   const [visemes, setVisemes] = useState<any>(null);
   const [showChat, setShowChat] = useState<boolean>(false);
-  const [response, setResponse] = useState("Hola, ¿cómo estás? Soy Zen, tu guía personal en Despierta.online, aquí para ayudarte con bienestar y desarrollo personal: Espiritualidad, Cursos y Talleres, Desarrollo Personal, Productos, Esoterismo y Oráculos, y Eventos en Vivo. ¿Cómo puedo asistirte hoy?");
+  const [response, setResponse] = useState("Hola, ¿cómo estás? Soy Canna AI, tu guía personal en CBDMEX, aquí para ayudarte con todo lo relacionado con el cannabis. ¿Cómo puedo asistirte hoy?");
   const [count, setCount] = useState(0)
   const [displayText, setDisplayText] = useState('INITIALIZED: ready to test speech...');
   const [recording, setRecording] = useState("not yet");
